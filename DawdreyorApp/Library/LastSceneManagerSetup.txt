@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Log In.unity
+- path: Assets/Scenes/TimeSheet/TimeSheet.unity
   isLoaded: 1
   isActive: 1
