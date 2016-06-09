@@ -26,6 +26,7 @@ public class SaveLogin : MonoBehaviour {
 		//Set Playerprefs
 		PlayerPrefs.SetString("Username", "nothing");
 		PlayerPrefs.SetString ("Password", "nothing");
+		PlayerPrefs.SetInt ("Index", 0);
 	
 	}
 	
@@ -39,7 +40,6 @@ public class SaveLogin : MonoBehaviour {
 		WWW userWWW = new WWW (userURL);
 		yield return userWWW;
 		usernameList = userWWW.text;
-		Debug.Log (usernameList);
 		continueCheck += 1;
 	}
 
@@ -149,6 +149,7 @@ public class SaveLogin : MonoBehaviour {
 	//Check to make sure the creds are right to login and if so, login
 	public void LoginCheck() {
 		if (usernameError.activeSelf == false & passwordError.activeSelf == false & PlayerPrefs.GetString ("Username") != "nothing" & PlayerPrefs.GetString ("Password") != "nothing") {
+			PlayerPrefs.SetInt ("Index", userIndex);
 			SceneManager.LoadScene (mainMenuScene);
 		}
 	}

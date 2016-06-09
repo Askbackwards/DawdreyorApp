@@ -3,25 +3,39 @@ using System.Collections;
 using UnityEngine.UI;
 using System.IO;
 using UnityEngine.SceneManagement;
+using System;
+using System.Net;
+using System.Net.Mail;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 
 public class ClockIt : MonoBehaviour {
 
-	public GameObject actionText, timeText, jobInput, submitJob, submitError, contentPane;
+	public GameObject actionText, timeText, jobInput, submitJob, submitError, contentPane, popUpBackground, loadingScreen;
 
 	private GameObject tempObj;
 	private int valueChosen;
-	private string txtPath, job;
+	private string emailList, emailURL, txtPath, job, date;
 	private float stamps;
+	private string[] emailArray;
 
 	//-----------------------------------------------------------------------------------
 
 	void Start () {
-		txtPath = Application.persistentDataPath + "/" + System.DateTime.Now.Date + "::" + PlayerPrefs.GetString("Username") +".txt";
-		// TODO: Replace with Application.persistentDataPath + "/" + System.DateTime.Now.Date + "::" + PlayerPrefs.GetString("Username") +".txt"
+		//Assign the file path
+		date = (System.DateTime.Now.Month.ToString()) + "-" + (System.DateTime.Now.Day.ToString()) + "-" + (System.DateTime.Now.Year.ToString());
+		//txtPath = Application.persistentDataPath + "/" + date + "~" + PlayerPrefs.GetString("Username") +".txt";
+		txtPath = "C:/Users/nomore/Desktop/Test.txt";
+
+		//Set some values
 		valueChosen = 4;
 		job = " ";
 		stamps = 1;
+		emailURL = "https://dl.dropboxusercontent.com/s/u1vz76hek3u4hep/Emails.txt";
+		StartCoroutine (GetEmails());
 
+
+		//Load the current logs if there are any
 		if(File.Exists(txtPath) == true)
 			LoadCurrentText ();
 	}
@@ -34,7 +48,18 @@ public class ClockIt : MonoBehaviour {
 
 	//-----------------------------------------------------------------------------------
 
+	//Coroutine to retrieve text files
+	private IEnumerator GetEmails() {
+		WWW emailWWW = new WWW (emailURL);
+		yield return emailWWW;
+		emailList = emailWWW.text;
+		emailArray = emailList.Split ('=');
+	}
+
+	//-----------------------------------------------------------------------------------
+
 	private void LoadCurrentText() {
+		//Sets up char array that will split job and time
 		char[] spaceArray;
 		spaceArray = "\t".ToCharArray();
 
@@ -161,8 +186,69 @@ public class ClockIt : MonoBehaviour {
 
 	//-----------------------------------------------------------------------------------
 
+	//Sends the file to dropbox after reformating it for excel (csv) and deletes it
 	public void Submit() {
-		File.Delete (txtPath);
-		SceneManager.LoadScene ("TimeSheet");
+		//Confirm their action
+		if (File.Exists(txtPath))
+			popUpBackground.SetActive (true);
+	}
+
+	public void No() {
+		popUpBackground.SetActive (false);
+	}
+
+	public void Yes() {
+		popUpBackground.SetActive (false);
+		loadingScreen.SetActive (true);
+		StartCoroutine(SendIt ());
+	}
+
+	//Where the action happens
+	private IEnumerator SendIt() {
+		//Sets up char array that will split job and time
+		char[] spaceArray;
+		spaceArray = "\t:".ToCharArray();
+		//Rewrite the file with excel friendly info (csv)
+		string[] oldText = File.ReadAllLines(txtPath);
+		StreamWriter streamW = new StreamWriter(txtPath);
+		for (int i = 0; i < oldText.Length; i++) {
+			string[] tempLine = oldText [i].Split (spaceArray, 3);
+			streamW.WriteLine (tempLine[0] + "," + tempLine[1] + "," + tempLine[2] + "\n");
+		}
+		streamW.Flush ();
+		streamW.Close ();
+
+		//Email that file
+		MailMessage mail = new MailMessage();
+		mail.From = new MailAddress ("jerod.dep@gmail.com");
+		mail.Bcc.Add ("jerod_2de0@sendtodropbox.com");
+		//Make sure the send them a copy if they have an email
+		if (emailArray[PlayerPrefs.GetInt("Index") - 1] != "none")
+			mail.To.Add (emailArray[PlayerPrefs.GetInt("Index")-1]);
+		mail.Subject = PlayerPrefs.GetString ("Username");
+		mail.Body = "TimeSheet";
+		System.Net.Mail.Attachment attachment = new System.Net.Mail.Attachment (txtPath);
+		mail.Attachments.Add (attachment);
+
+		SmtpClient smtp = new SmtpClient ("smtp.gmail.com");
+		smtp.Port = 587;
+		smtp.Credentials = new System.Net.NetworkCredential ("jerod.dep@gmail.com", "JDio683$") as ICredentialsByHost;
+		smtp.EnableSsl = true;
+
+		ServicePointManager.ServerCertificateValidationCallback =
+			delegate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) {
+			return true;
+		};
+		smtp.Send(mail);
+
+		//GetRid of loading screen
+		loadingScreen.SetActive (false);
+
+		//SceneManager.LoadScene ("TimeSheet");
+
+		yield return null;
+
+
+
 	}
 }
