@@ -18,32 +18,46 @@ public class ClockIt : MonoBehaviour {
 	private string emailList, emailURL, txtPath, job, date;
 	private float stamps;
 	private string[] emailArray;
+	private bool doneSending;
 
 	//-----------------------------------------------------------------------------------
 
 	void Start () {
 		//Assign the file path
 		date = (System.DateTime.Now.Month.ToString()) + "-" + (System.DateTime.Now.Day.ToString()) + "-" + (System.DateTime.Now.Year.ToString());
-		//txtPath = Application.persistentDataPath + "/" + date + "~" + PlayerPrefs.GetString("Username") +".txt";
-		txtPath = "C:/Users/nomore/Desktop/Test.txt";
+		txtPath = Application.persistentDataPath + "/" + date + "~" + PlayerPrefs.GetString("Username") +".txt";
+		//txtPath = "C:/Users/nomore/Desktop/Test.txt";
 
 		//Set some values
 		valueChosen = 4;
 		job = " ";
 		stamps = 1;
+		doneSending = false;
 		emailURL = "https://dl.dropboxusercontent.com/s/u1vz76hek3u4hep/Emails.txt";
 		StartCoroutine (GetEmails());
+
 
 
 		//Load the current logs if there are any
 		if(File.Exists(txtPath) == true)
 			LoadCurrentText ();
+
+		//Create File if it's not there
+		if (File.Exists (txtPath) == false) 
+			File.Create (txtPath); 
 	}
 
 	//-----------------------------------------------------------------------------------
 
 	void Update () {
-	
+		if (doneSending == true) {
+			//Delete File
+			File.Delete(txtPath);
+			//GetRid of loading screen
+			loadingScreen.SetActive (false);
+			//Restart App
+			SceneManager.LoadScene("TimeSheet");
+		}
 	}
 
 	//-----------------------------------------------------------------------------------
@@ -164,20 +178,18 @@ public class ClockIt : MonoBehaviour {
 
 	//Log the time and job in a text file
 	private void Logit(string action) { 
-		//Create File
 
-		if (File.Exists (txtPath) == false) {
-			File.Create (txtPath); 
-		}
 		//Read File
 		string[] oldFile = File.ReadAllLines (txtPath);
 
 		//OpenFile
 		StreamWriter streamW = new StreamWriter(txtPath);
+
 		//Rewrite what was there
 		for (int i = 0; i < oldFile.Length; i++) {
-			streamW.WriteLine(oldFile[i]);
+			streamW.WriteLine (oldFile [i]);
 		}
+
 		//Write new stuff
 		streamW.WriteLine (action + "\t" + System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute);
 		streamW.Flush ();
@@ -208,6 +220,7 @@ public class ClockIt : MonoBehaviour {
 		//Sets up char array that will split job and time
 		char[] spaceArray;
 		spaceArray = "\t:".ToCharArray();
+
 		//Rewrite the file with excel friendly info (csv)
 		string[] oldText = File.ReadAllLines(txtPath);
 		StreamWriter streamW = new StreamWriter(txtPath);
@@ -239,16 +252,18 @@ public class ClockIt : MonoBehaviour {
 			delegate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) {
 			return true;
 		};
-		smtp.Send(mail);
+		smtp.SendAsync(mail, "");
 
-		//GetRid of loading screen
-		loadingScreen.SetActive (false);
+		smtp.SendCompleted += new SendCompletedEventHandler (FinishedSending);
 
 		//SceneManager.LoadScene ("TimeSheet");
 
 		yield return null;
+	}
 
 
-
+	//This is called when the message has been sent
+	private void FinishedSending(object sender, System.ComponentModel.AsyncCompletedEventArgs e) {
+		doneSending = true;
 	}
 }
