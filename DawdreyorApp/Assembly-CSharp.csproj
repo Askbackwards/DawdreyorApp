@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\LoadScene.cs" />
      <Compile Include="Assets\Scripts\Login\SaveLogin.cs" />
      <Compile Include="Assets\Scripts\TimeSheet\ClockIt.cs" />
+     <Compile Include="Assets\Scripts\TimeSheet\DeleteIdentifier.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
