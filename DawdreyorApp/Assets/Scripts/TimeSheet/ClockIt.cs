@@ -26,8 +26,8 @@ public class ClockIt : MonoBehaviour {
 	void Start () {
 		//Assign the file path
 		date = (System.DateTime.Now.Month.ToString ()) + "-" + (System.DateTime.Now.Day.ToString ()) + "-" + (System.DateTime.Now.Year.ToString ());
-		//txtPath = Application.persistentDataPath + "/" + date + "~" + PlayerPrefs.GetString ("Username") + ".txt";
-		txtPath = "C:/Users/nomore/Desktop/Test.txt";
+		txtPath = Application.persistentDataPath + "/" + date + "~" + PlayerPrefs.GetString ("Username") + ".txt";
+		//txtPath = "C:/Users/nomore/Desktop/Test.txt";
 
 		//Set some values
 		valueChosen = 4;
@@ -506,24 +506,29 @@ public class ClockIt : MonoBehaviour {
 					string[] tempLine = oldFile [i].Split (spaceArray, 6);
 
 					int tempInt = int.Parse (tempLine [2].Trim ());
+					int tempInt2 = int.Parse (tempLine [1].Trim ());
 
-					if (tempInt < minute && tempInt >= downNum) {
-						downNum = tempInt;
-						downClose = i;
-						hasDown = true;
-					} else if (tempInt > minute && tempInt < upNum && tempInt != upNum) {
-						upNum = tempInt;
-						upClose = i;
-						hasUp = true;
-					} else if (tempInt == minute) {
-						equal = i + 1;
+
+
+					if (tempInt2 == hour) {
+						if (tempInt < minute && tempInt >= downNum) {
+							downNum = tempInt;
+							downClose = i;
+							hasDown = true;
+						} else if ((tempInt > minute && tempInt < upNum && tempInt != upNum) || (tempInt > minute && upNum == 0) ) {
+							upNum = tempInt;
+							upClose = i;
+							hasUp = true;
+						} else if (tempInt == minute) {
+							equal = i + 1;
+						}
 					}
 				}
 
 				//Find line based on minute
 				if (equal == 999) {
 					if (hasUp == true) {
-						insertLine = upClose - 1;
+						insertLine = upClose;
 					} else if (hasDown == true) {
 						insertLine = downClose + 1; 
 					}
