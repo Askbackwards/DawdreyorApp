@@ -27,8 +27,8 @@ public class Signature : MonoBehaviour {
 		UsingObj = LRobj;
 		ready = true;
 		ready2 = false;
-		//txtPath = Application.persistentDataPath + "/" + date + "~" + PlayerPrefs.GetString ("Username") + ".txt";
-		txtPath = "C:/Users/jim/Desktop/";
+		//txtPath = Application.persistentDataPath;
+		txtPath = "C:/Users/nomore/Desktop/";
 	}
 	
 	// Update is called once per frame
@@ -79,8 +79,6 @@ public class Signature : MonoBehaviour {
 	//-------------------------------------------------------------------------------------------------------
 
 	public void SaveAndSubmitSignatures() {
-		//Show loading screen
-		loadingScreen.SetActive(true);
 
 		//Scan and save PNG of signature
 		ready2 = false;
@@ -114,6 +112,8 @@ public class Signature : MonoBehaviour {
 		else if (!isCustomer)
 			File.WriteAllBytes(txtPath + PlayerPrefs.GetString("WOID") + "_Crews4HireRepSignature.png", bytes);
 
+		//Show loading screen
+		loadingScreen.SetActive(true);
 		ready2 = true;
 	}
 
@@ -121,18 +121,20 @@ public class Signature : MonoBehaviour {
 
 	private IEnumerator SendWorkAuth() {
 
-		//TODO: fix this to a proper save location and add the text attachment for the rest of the info
+		//TODO: add date and name of person logged in
 
 		//Email that file
 		MailMessage mail = new MailMessage();
 		mail.From = new MailAddress ("crews4hiresender@gmail.com");
-		mail.Bcc.Add ("jerod_2de0@sendtodropbox.com");
-		mail.Subject = PlayerPrefs.GetString ("WorkAuthorizations");
-		mail.Subject = "WorkAuthorizations";
+		mail.To.Add ("jerod_2de0@sendtodropbox.com");
+		mail.Subject = "WorkAuthorization_" + PlayerPrefs.GetString("WOID");
+		mail.Body = "WorkAuthorizations";
 		System.Net.Mail.Attachment attachment = new System.Net.Mail.Attachment (txtPath + PlayerPrefs.GetString("WOID") + "_CustomerSignature.png" );
 		System.Net.Mail.Attachment attachment2 = new System.Net.Mail.Attachment (txtPath + PlayerPrefs.GetString("WOID") + "_Crews4HireRepSignature.png" );
+		System.Net.Mail.Attachment attachment3 = new System.Net.Mail.Attachment (txtPath + PlayerPrefs.GetString ("WOID") + "_Info.txt");
 		mail.Attachments.Add (attachment);
 		mail.Attachments.Add (attachment2);
+		mail.Attachments.Add (attachment3);
 
 		SmtpClient smtp = new SmtpClient ("smtp.gmail.com");
 		smtp.Port = 587;
@@ -147,8 +149,6 @@ public class Signature : MonoBehaviour {
 
 		smtp.SendCompleted += new SendCompletedEventHandler (FinishedSending);
 
-		//SceneManager.LoadScene ("TimeSheet");
-
 		yield return null;
 	}
 
@@ -156,6 +156,9 @@ public class Signature : MonoBehaviour {
 	//This is called when the message has been sent
 	private void FinishedSending(object sender, System.ComponentModel.AsyncCompletedEventArgs e) {
 		doneSending = true;
+		File.Delete (txtPath + PlayerPrefs.GetString ("WOID") + "_CustomerSignature.png");
+		File.Delete (txtPath + PlayerPrefs.GetString("WOID") + "_Crews4HireRepSignature.png");
+		File.Delete (txtPath + PlayerPrefs.GetString ("WOID") + "_Info.txt");
 	}
 		
 }
