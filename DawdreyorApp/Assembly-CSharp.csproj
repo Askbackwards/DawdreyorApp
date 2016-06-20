@@ -53,6 +53,8 @@
      <Compile Include="Assets\Scripts\WorkAuthorizations\DeActivate.cs" />
      <Compile Include="Assets\Scripts\WorkAuthorizations\IDHandling.cs" />
      <Compile Include="Assets\Scripts\WorkAuthorizations\LoadList.cs" />
+     <Compile Include="Assets\Scripts\WorkAuthorizations\SaveWONumInPP.cs" />
+     <Compile Include="Assets\Scripts\WorkAuthorizations\ScreenOrient.cs" />
      <Compile Include="Assets\Scripts\WorkAuthorizations\Signature.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
