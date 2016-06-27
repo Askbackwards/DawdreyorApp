@@ -80,15 +80,17 @@ public class WriteValsForLocation : MonoBehaviour {
 			File.Create (txtPath ).Dispose ();
 
 		//Create the values to help format the file
-		string[] format = { "CustomerName", "PropertyAdress", "MenInCrew", "City", "State", "Zip" }; 
+		string[] format = { "CustomerName", "PropertyAdress", "MenInCrew", "City", "State", "Zip", "Date" }; 
 
-		string[] localVals = { customerName, propertyAddress, menInCrew, city, state, zip };
+		string date = System.DateTime.Now.Date.ToString ();
+
+		string[] localVals = { customerName, propertyAddress, menInCrew, city, state, zip, date };
 
 		//OpenFile
 		StreamWriter streamW = new StreamWriter(txtPath);
 
 		//Write new stuff
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < 7; i++) {
 
 			streamW.WriteLine(format[i] + "," + localVals[i] + "\n");
 
