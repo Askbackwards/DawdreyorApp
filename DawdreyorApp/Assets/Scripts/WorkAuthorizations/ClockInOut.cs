@@ -37,7 +37,7 @@ public class ClockInOut : MonoBehaviour {
 		string minuteNow = System.DateTime.Now.TimeOfDay.ToString();
 
 		//Write New stuff
-		streamW.WriteLine(minuteNow);
+		streamW.WriteLine("TimeIn," + minuteNow);
 			
 		streamW.Flush ();
 		streamW.Close ();
@@ -63,7 +63,7 @@ public class ClockInOut : MonoBehaviour {
 		string minuteNow = System.DateTime.Now.TimeOfDay.ToString();
 
 		//Write New stuff
-		streamW.WriteLine(minuteNow);
+		streamW.WriteLine("TimeOut," + minuteNow);
 
 		streamW.Flush ();
 		streamW.Close ();

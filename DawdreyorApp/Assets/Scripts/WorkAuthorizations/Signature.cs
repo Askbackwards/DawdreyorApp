@@ -62,6 +62,11 @@ public class Signature : MonoBehaviour {
 			File.Delete (txtPath + PlayerPrefs.GetString ("WOID") + "_CustomerSignature.png");
 			File.Delete (txtPath + PlayerPrefs.GetString ("WOID") + "_Crews4HireRepSignature.png");
 			File.Delete (txtPath + PlayerPrefs.GetString ("WOID") + "_Info.txt");
+			if (PlayerPrefs.GetInt ("picAmount") != 0) {
+				for (int i = 1; i <= PlayerPrefs.GetInt ("picAmount"); i++) {
+					File.Delete (txtPath + PlayerPrefs.GetString ("WOID") + "_Picture" + i + ".png");
+				}
+			}
 			SceneManager.LoadScene ("WorkAuthorization");
 		}
 	}
@@ -133,7 +138,7 @@ public class Signature : MonoBehaviour {
 		mail.Body = "WorkAuthorizations";
 		if (PlayerPrefs.GetInt ("picAmount") != 0) {
 			for (int i = 1; i <= PlayerPrefs.GetInt ("picAmount"); i++) {
-				System.Net.Mail.Attachment at = new System.Net.Mail.Attachment (txtPath + PlayerPrefs.GetInt ("WOID") + "_Picture" + i + ".png");
+				System.Net.Mail.Attachment at = new System.Net.Mail.Attachment (txtPath + PlayerPrefs.GetString ("WOID") + "_Picture" + i + ".png");
 				mail.Attachments.Add (at);
 			}
 		}
