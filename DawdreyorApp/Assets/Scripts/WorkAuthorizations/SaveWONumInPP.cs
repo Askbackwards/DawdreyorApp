@@ -17,8 +17,9 @@ public class SaveWONumInPP : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//txtPath = Application.persistentDataPath + "WOList.txt";
-		txtPath = "C:/Users/nomore/Desktop/WOList.txt";
+		PlayerPrefs.SetInt ("picAmount", 0);
+		txtPath = Application.persistentDataPath + "/WOList.txt";
+		//txtPath = "C:/Users/nomore/Desktop/WOList.txt";
 		WOListURL = "https://dl.dropboxusercontent.com/s/9lnd15w7mccer0v/WOList.txt";
 		StartCoroutine (GetWOList ());
 	}
@@ -47,10 +48,10 @@ public class SaveWONumInPP : MonoBehaviour {
 		StreamWriter streamW = new StreamWriter(txtPath);
 
 		//Write Old Stuff
-		streamW.WriteLine (WOList);
+		streamW.Write (WOList);
 
 		//Write new stuff
-		streamW.WriteLine (PlayerPrefs.GetString("WOID") + ",");
+		streamW.Write (PlayerPrefs.GetString("WOID") + ",");
 		streamW.Flush ();
 		streamW.Close ();
 

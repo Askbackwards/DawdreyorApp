@@ -18,8 +18,8 @@ public class WriteValsForLocation : MonoBehaviour {
 		state = "";
 		zip = "";
 
-		//txtPath = Application.persistentDataPath + PlayerPrefs.GetString ("WOID") + "_Info.txt";
-		txtPath = "C:/Users/nomore/Desktop/" + PlayerPrefs.GetString ("WOID") + "_Info.txt";
+		txtPath = Application.persistentDataPath + "/" + PlayerPrefs.GetString ("WOID") + "_Info.txt";
+		//txtPath = "C:/Users/nomore/Desktop/" + PlayerPrefs.GetString ("WOID") + "_Info.txt";
 
 	}
 	
@@ -79,21 +79,33 @@ public class WriteValsForLocation : MonoBehaviour {
 		if (!File.Exists (txtPath))
 			File.Create (txtPath ).Dispose ();
 
+		string[] oldText = File.ReadAllLines(txtPath);
+
 		//Create the values to help format the file
-		string[] format = { "CustomerName", "PropertyAdress", "MenInCrew", "City", "State", "Zip", "Date" }; 
+		string[] format = { "CustomerName", "PropertyAdress", "MenInCrew", "City", "State", "Zip", "Date", "Employee" }; 
 
 		string date = System.DateTime.Now.Date.ToString ();
+		string[] newDate = date.Split (" ".ToCharArray ());
 
-		string[] localVals = { customerName, propertyAddress, menInCrew, city, state, zip, date };
+		string employee = PlayerPrefs.GetString ("Username");
+
+		string[] localVals = { customerName, propertyAddress, menInCrew, city, state, zip, newDate[0], employee };
 
 		//OpenFile
 		StreamWriter streamW = new StreamWriter(txtPath);
 
 		//Write new stuff
-		for (int i = 0; i < 7; i++) {
+		for (int i = 0; i < 8; i++) {
 
-			streamW.WriteLine(format[i] + "," + localVals[i] + "\n");
+			streamW.WriteLine(format[i] + "," + localVals[i]);
 
+		}
+
+		//write old stuff
+		if (oldText.Length > 0) {
+			for (int i = 0; i < oldText.Length; i++) {
+				streamW.WriteLine (oldText [i]);
+			}
 		}
 
 		streamW.Flush ();

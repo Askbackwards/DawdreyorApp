@@ -50,12 +50,15 @@
      <Compile Include="Assets\Scripts\Login\SaveLogin.cs" />
      <Compile Include="Assets\Scripts\TimeSheet\ClockIt.cs" />
      <Compile Include="Assets\Scripts\TimeSheet\DeleteIdentifier.cs" />
+     <Compile Include="Assets\Scripts\WorkAuthorizations\ClockInOut.cs" />
      <Compile Include="Assets\Scripts\WorkAuthorizations\DeActivate.cs" />
+     <Compile Include="Assets\Scripts\WorkAuthorizations\ExtraNotes.cs" />
      <Compile Include="Assets\Scripts\WorkAuthorizations\IDHandling.cs" />
      <Compile Include="Assets\Scripts\WorkAuthorizations\LoadList.cs" />
      <Compile Include="Assets\Scripts\WorkAuthorizations\SaveWONumInPP.cs" />
      <Compile Include="Assets\Scripts\WorkAuthorizations\ScreenOrient.cs" />
      <Compile Include="Assets\Scripts\WorkAuthorizations\Signature.cs" />
+     <Compile Include="Assets\Scripts\WorkAuthorizations\TakePicture.cs" />
      <Compile Include="Assets\Scripts\WorkAuthorizations\WorkIDHandler.cs" />
      <Compile Include="Assets\Scripts\WorkAuthorizations\WorkInfo.cs" />
      <Compile Include="Assets\Scripts\WorkAuthorizations\WriteValsForLocation.cs" />

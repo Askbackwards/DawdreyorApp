@@ -31,8 +31,8 @@ public class WorkInfo : MonoBehaviour {
 		supplies = new string[50,50];
 		quantity = new string[50,50];
 
-		//txtPath = Application.persistentDataPath + PlayerPrefs.GetString ("WOID") + "_Info.txt";
-		txtPath = "C:/Users/nomore/Desktop/" + PlayerPrefs.GetString ("WOID") + "_Info.txt";
+		txtPath = Application.persistentDataPath + "/" + PlayerPrefs.GetString ("WOID") + "_Info.txt";
+		//txtPath = "C:/Users/nomore/Desktop/" + PlayerPrefs.GetString ("WOID") + "_Info.txt";
 
 		//Set ID
 		duplicateList[1].GetComponent<WorkIDHandler>().setID("0");
@@ -171,7 +171,7 @@ public class WorkInfo : MonoBehaviour {
 		//Write old stuff
 		if (oldText.Length > 0) {
 			if (oldText [0].Contains ("CustomerName")) {
-				for (int i = 0; i < 7; i++) {
+				for (int i = 0; i < 8; i++) {
 
 					streamW.WriteLine (oldText [i]);
 
@@ -187,6 +187,14 @@ public class WorkInfo : MonoBehaviour {
 					break;
 				}
 				streamW.WriteLine (",,," + supplies [i, l] + "," + quantity [i, l]);
+			}
+		}
+
+		//Add extra Notes
+		if (oldText.Length > 7) {
+			streamW.WriteLine (oldText [8]);
+			if (oldText.Length > 8) {
+				streamW.WriteLine (oldText [9]);
 			}
 		}
 

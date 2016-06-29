@@ -73,7 +73,7 @@ public class ClockIt : MonoBehaviour {
 		WWW emailWWW = new WWW (emailURL);
 		yield return emailWWW;
 		emailList = emailWWW.text;
-		emailArray = emailList.Split ('=');
+		emailArray = emailList.Split ("=".ToCharArray());
 	}
 
 	//-----------------------------------------------------------------------------------

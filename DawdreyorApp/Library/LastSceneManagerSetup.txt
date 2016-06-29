@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Work Auth/NewAuth/WorkInfo.unity
+- path: Assets/Scenes/Work Auth/NewAuth/AddPicture.unity
   isLoaded: 1
   isActive: 1

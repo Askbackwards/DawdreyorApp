@@ -37,7 +37,7 @@ public class LoadList : MonoBehaviour {
 		listArray = theList.Split(",".ToCharArray());
 
 		//Create the new object
-		for (int i = 0; i < listArray.Length; i++) {
+		for (int i = 0; i < listArray.Length - 1; i++) {
 			GameObject tempObj = (GameObject)Instantiate (WONum);
 			tempObj.GetComponentInChildren<Text> ().text = listArray[i];
 			tempObj.transform.SetParent (contentPane.transform);

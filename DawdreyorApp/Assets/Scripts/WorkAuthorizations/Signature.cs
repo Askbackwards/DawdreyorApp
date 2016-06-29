@@ -27,8 +27,8 @@ public class Signature : MonoBehaviour {
 		UsingObj = LRobj;
 		ready = true;
 		ready2 = false;
-		//txtPath = Application.persistentDataPath;
-		txtPath = "C:/Users/nomore/Desktop/";
+		txtPath = Application.persistentDataPath + "/";
+		//txtPath = "C:/Users/nomore/Desktop/";
 	}
 	
 	// Update is called once per frame
@@ -58,8 +58,12 @@ public class Signature : MonoBehaviour {
 			StartCoroutine (SendWorkAuth ());
 		}
 
-		if (doneSending)
+		if (doneSending) {
+			File.Delete (txtPath + PlayerPrefs.GetString ("WOID") + "_CustomerSignature.png");
+			File.Delete (txtPath + PlayerPrefs.GetString ("WOID") + "_Crews4HireRepSignature.png");
+			File.Delete (txtPath + PlayerPrefs.GetString ("WOID") + "_Info.txt");
 			SceneManager.LoadScene ("WorkAuthorization");
+		}
 	}
 
 	private IEnumerator StartNewLine() {
@@ -121,14 +125,18 @@ public class Signature : MonoBehaviour {
 
 	private IEnumerator SendWorkAuth() {
 
-		//TODO: add date and name of person logged in
-
 		//Email that file
 		MailMessage mail = new MailMessage();
 		mail.From = new MailAddress ("crews4hiresender@gmail.com");
 		mail.To.Add ("jerod_2de0@sendtodropbox.com");
 		mail.Subject = "WorkAuthorization_" + PlayerPrefs.GetString("WOID");
 		mail.Body = "WorkAuthorizations";
+		if (PlayerPrefs.GetInt ("picAmount") != 0) {
+			for (int i = 1; i <= PlayerPrefs.GetInt ("picAmount"); i++) {
+				System.Net.Mail.Attachment at = new System.Net.Mail.Attachment (txtPath + PlayerPrefs.GetInt ("WOID") + "_Picture" + i + ".png");
+				mail.Attachments.Add (at);
+			}
+		}
 		System.Net.Mail.Attachment attachment = new System.Net.Mail.Attachment (txtPath + PlayerPrefs.GetString("WOID") + "_CustomerSignature.png" );
 		System.Net.Mail.Attachment attachment2 = new System.Net.Mail.Attachment (txtPath + PlayerPrefs.GetString("WOID") + "_Crews4HireRepSignature.png" );
 		System.Net.Mail.Attachment attachment3 = new System.Net.Mail.Attachment (txtPath + PlayerPrefs.GetString ("WOID") + "_Info.txt");
@@ -156,9 +164,6 @@ public class Signature : MonoBehaviour {
 	//This is called when the message has been sent
 	private void FinishedSending(object sender, System.ComponentModel.AsyncCompletedEventArgs e) {
 		doneSending = true;
-		File.Delete (txtPath + PlayerPrefs.GetString ("WOID") + "_CustomerSignature.png");
-		File.Delete (txtPath + PlayerPrefs.GetString("WOID") + "_Crews4HireRepSignature.png");
-		File.Delete (txtPath + PlayerPrefs.GetString ("WOID") + "_Info.txt");
 	}
 		
 }
