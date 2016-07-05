@@ -6,10 +6,12 @@ using UnityEngine.SceneManagement;
 public class ExtraNotes : MonoBehaviour {
 
 	private string txtPath;
-	private int timeOut;
+	private int timeOut, timeIn;
 
 	// Use this for initialization
 	void Start () {
+		timeIn = -1;
+		timeOut = -1;
 		txtPath = Application.persistentDataPath + "/" + PlayerPrefs.GetString ("WOID") + "_Info.txt";
 		//txtPath = "C:/Users/nomore/Desktop/" + PlayerPrefs.GetString ("WOID") + "_Info.txt";
 	}
@@ -35,8 +37,10 @@ public class ExtraNotes : MonoBehaviour {
 			for (int i = 0; i < oldText.Length; i++) {
 				if (!oldText [i].Contains ("TimeOut") && !oldText [i].Contains ("TimeIn")) {
 					streamW.WriteLine (oldText [i]);
-				} else {
+				} else if (oldText [i].Contains ("TimeOut")) {
 					timeOut = i;
+				} else if (oldText [i].Contains ("TimeIn")) {
+					timeIn = i;
 				}
 			}
 		}
@@ -45,8 +49,10 @@ public class ExtraNotes : MonoBehaviour {
 		streamW.WriteLine("ExtraNotes," + notes);
 
 		//Write Time out
-		streamW.WriteLine(oldText[timeOut - 1]);
-		streamW.WriteLine (oldText [timeOut]);
+		if (timeIn != -1)
+			streamW.WriteLine(oldText[timeIn]);
+		if (timeOut != -1)
+			streamW.WriteLine (oldText [timeOut]);
 
 		streamW.Flush ();
 		streamW.Close ();

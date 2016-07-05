@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class WorkInfo : MonoBehaviour {
 
 	public GameObject[] duplicateList;
-	public GameObject holder, contentPane;
+	public GameObject contentPane;
 
 	private List<GameObject> doneDuped;
 	private string[] unitNum, measurement, workPerformed;
@@ -16,6 +16,7 @@ public class WorkInfo : MonoBehaviour {
 	private int place, dupeMarker, whichVal, singleID, supplyID, quantityID;
 	private bool noGo;
 	private string txtPath;
+	private GameObject holder;
 
 	// Use this for initialization
 	void Start () {
@@ -192,9 +193,8 @@ public class WorkInfo : MonoBehaviour {
 
 		//Add extra Notes
 		if (oldText.Length > 7) {
-			streamW.WriteLine (oldText [8]);
-			if (oldText.Length > 8) {
-				streamW.WriteLine (oldText [9]);
+			for (int i = 8; i < oldText.Length; i++) {
+				streamW.WriteLine (oldText [i]);
 			}
 		}
 

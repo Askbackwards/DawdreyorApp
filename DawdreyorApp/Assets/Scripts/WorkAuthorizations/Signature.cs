@@ -18,14 +18,14 @@ public class Signature : MonoBehaviour {
 	private int curVtex;
 	private GameObject UsingObj;
 	private bool doneSending, ready, ready2;
-	private string txtPath;
+	private string txtPath, newArray;
 
 	// Use this for initialization
 	void Start () {
 		LR = LRobj.GetComponent<LineRenderer> ();
 		curVtex = 0;
 		UsingObj = LRobj;
-		ready = true;
+		ready = false;
 		ready2 = false;
 		txtPath = Application.persistentDataPath + "/";
 		//txtPath = "C:/Users/nomore/Desktop/";
@@ -55,10 +55,12 @@ public class Signature : MonoBehaviour {
 
 		if (ready2) {
 			//Send that shit
+			ready2 = false;
 			StartCoroutine (SendWorkAuth ());
 		}
 
 		if (doneSending) {
+			//Delete old files
 			File.Delete (txtPath + PlayerPrefs.GetString ("WOID") + "_CustomerSignature.png");
 			File.Delete (txtPath + PlayerPrefs.GetString ("WOID") + "_Crews4HireRepSignature.png");
 			File.Delete (txtPath + PlayerPrefs.GetString ("WOID") + "_Info.txt");
@@ -67,7 +69,21 @@ public class Signature : MonoBehaviour {
 					File.Delete (txtPath + PlayerPrefs.GetString ("WOID") + "_Picture" + i + ".png");
 				}
 			}
-			SceneManager.LoadScene ("WorkAuthorization");
+
+			//Get rid of WOID in list
+			string[] oldText = File.ReadAllLines (txtPath + "WOList.txt");
+			string [] listArray = oldText[0].Split(",".ToCharArray());
+
+			StreamWriter streamW = new StreamWriter(txtPath + "WOList.txt");
+			for (int i = 0; i < listArray.Length; i++) {
+				if (listArray [i] != PlayerPrefs.GetString ("WOID"))
+					newArray += listArray [i] + ",";
+			}
+			streamW.WriteLine (newArray);
+			streamW.Flush ();
+			streamW.Close ();
+
+			SceneManager.LoadScene ("MainMenu");
 		}
 	}
 
@@ -91,10 +107,15 @@ public class Signature : MonoBehaviour {
 
 		//Scan and save PNG of signature
 		ready2 = false;
+		ready = false;
 		StartCoroutine(SaveSig(false));
 	}
 
 	public void SaveCustomerSignature() {
+
+		//No more writing
+		ready2 = false;
+		ready = false;
 		//Scan and save PNG of signature
 		StartCoroutine(SaveSig(true));
 	}
@@ -136,12 +157,14 @@ public class Signature : MonoBehaviour {
 		mail.To.Add ("jerod_2de0@sendtodropbox.com");
 		mail.Subject = "WorkAuthorization_" + PlayerPrefs.GetString("WOID");
 		mail.Body = "WorkAuthorizations";
+
 		if (PlayerPrefs.GetInt ("picAmount") != 0) {
 			for (int i = 1; i <= PlayerPrefs.GetInt ("picAmount"); i++) {
 				System.Net.Mail.Attachment at = new System.Net.Mail.Attachment (txtPath + PlayerPrefs.GetString ("WOID") + "_Picture" + i + ".png");
 				mail.Attachments.Add (at);
 			}
 		}
+
 		System.Net.Mail.Attachment attachment = new System.Net.Mail.Attachment (txtPath + PlayerPrefs.GetString("WOID") + "_CustomerSignature.png" );
 		System.Net.Mail.Attachment attachment2 = new System.Net.Mail.Attachment (txtPath + PlayerPrefs.GetString("WOID") + "_Crews4HireRepSignature.png" );
 		System.Net.Mail.Attachment attachment3 = new System.Net.Mail.Attachment (txtPath + PlayerPrefs.GetString ("WOID") + "_Info.txt");
@@ -163,12 +186,19 @@ public class Signature : MonoBehaviour {
 		smtp.SendCompleted += new SendCompletedEventHandler (FinishedSending);
 
 		yield return null;
+
 	}
 
 
 	//This is called when the message has been sent
-	private void FinishedSending(object sender, System.ComponentModel.AsyncCompletedEventArgs e) {
+	private void FinishedSending(object sended, System.ComponentModel.AsyncCompletedEventArgs e) {
 		doneSending = true;
+	}
+
+	//------------------------------------------------------------------------------------------------------------------
+		
+	public void AgreementFinished() {
+		ready = true;
 	}
 		
 }

@@ -337,8 +337,6 @@ public class ClockIt : MonoBehaviour {
 
 		smtp.SendCompleted += new SendCompletedEventHandler (FinishedSending);
 
-		//SceneManager.LoadScene ("TimeSheet");
-
 		yield return null;
 	}
 

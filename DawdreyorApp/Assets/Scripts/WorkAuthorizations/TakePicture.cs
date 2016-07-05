@@ -2,16 +2,21 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class TakePicture : MonoBehaviour {
 
+	public GameObject button1, button2;
+
 	private WebCamTexture webCamTex;
-	private bool first;
+	private bool first, done;
 	private string txtPath;
 
 	// Use this for initialization
 	void Start () {
 		first = true;
+		done = false;
+			
 		Application.RequestUserAuthorization (UserAuthorization.WebCam);
 
 		txtPath = Application.persistentDataPath + "/";
@@ -27,9 +32,18 @@ public class TakePicture : MonoBehaviour {
 		if (first == false) {
 			GetComponent<RawImage> ().texture = webCamTex;
 		}
+		if (done == true) {
+			button1.SetActive (true);
+			button2.SetActive (true);
+			done = false;
+		}
 	}
 
 	public void SnapPicture() {
+		//Turn off stuff to take picture
+		button1.SetActive (false);
+		button2.SetActive (false);
+
 		StartCoroutine (SnapIt ());
 	}
 
@@ -38,10 +52,10 @@ public class TakePicture : MonoBehaviour {
 		yield return new WaitForEndOfFrame();
 
 		//Create a texture the size of the area
-		Texture2D tex = new Texture2D(webCamTex.width, webCamTex.height, TextureFormat.RGB24, false);
+		Texture2D tex = new Texture2D(Camera.main.pixelWidth, Camera.main.pixelHeight, TextureFormat.RGB24, false);
 
 		//Read screen contents into the texture
-		tex.ReadPixels(new Rect(0,0, webCamTex.width, webCamTex.height), 0, 0);
+		tex.ReadPixels(new Rect(0,0, Camera.main.pixelWidth, Camera.main.pixelHeight), 0, 0);
 		tex.Apply ();
 
 		//Encode texture into PNG
@@ -51,9 +65,12 @@ public class TakePicture : MonoBehaviour {
 		//Save PNG
 		PlayerPrefs.SetInt("picAmount", PlayerPrefs.GetInt("picAmount") + 1);
 		File.WriteAllBytes(txtPath + PlayerPrefs.GetString("WOID") + "_Picture" + PlayerPrefs.GetInt("picAmount") + ".png", bytes);
+
+		done = true;
 	}
 
 	public void Endit() {
 		webCamTex.Stop ();
+		SceneManager.LoadScene ("NewWorkAuthorizationMenu");
 	}
 }
