@@ -2,18 +2,33 @@
 using System.Collections;
 using System.IO;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ExtraNotes : MonoBehaviour {
 
-	private string txtPath;
+	public GameObject extraNotesInput;
+
+	private string txtPath, notes;
 	private int timeOut, timeIn;
 
 	// Use this for initialization
 	void Start () {
+		notes = "";
 		timeIn = -1;
 		timeOut = -1;
 		txtPath = Application.persistentDataPath + "/" + PlayerPrefs.GetString ("WOID") + "_Info.txt";
 		//txtPath = "C:/Users/nomore/Desktop/" + PlayerPrefs.GetString ("WOID") + "_Info.txt";
+
+		if (File.Exists (txtPath)) {
+			string[] oldText = File.ReadAllLines (txtPath);
+			for (int i = 0; i < oldText.Length; i++) {
+				if (oldText[i].Contains ("Extra")) {
+					string[] split = oldText[i].Split(",".ToCharArray());
+					extraNotesInput.GetComponentInChildren<Text> ().text = split[1];
+					notes = split [1];
+				}
+			}
+		}
 	}
 	
 	// Update is called once per frame
@@ -21,7 +36,11 @@ public class ExtraNotes : MonoBehaviour {
 	
 	}
 
-	public void AddExtraNotes(string notes) {
+	public void AddExtraNotes(string NewNotes) {
+
+		if (NewNotes != "") {
+			notes = NewNotes;
+		}
 
 		//Make file if it doesn't exsist
 		if (!File.Exists (txtPath))

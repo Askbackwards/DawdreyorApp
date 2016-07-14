@@ -2,8 +2,11 @@
 using System.Collections;
 using System.IO;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class WriteValsForLocation : MonoBehaviour {
+
+	public GameObject[] inputs; 
 
 	private string txtPath, customerName, propertyAddress, menInCrew, city, state, zip;
 	private int whichVal;
@@ -20,6 +23,36 @@ public class WriteValsForLocation : MonoBehaviour {
 
 		txtPath = Application.persistentDataPath + "/" + PlayerPrefs.GetString ("WOID") + "_Info.txt";
 		//txtPath = "C:/Users/nomore/Desktop/" + PlayerPrefs.GetString ("WOID") + "_Info.txt";
+
+		if (File.Exists (txtPath)) {
+			string[] oldText = File.ReadAllLines (txtPath);
+			if (oldText [0].Contains ("Customer")) {
+				for (int i = 0; i < 6; i++) {
+					string[] splitText = oldText [i].Split (",".ToCharArray());
+					inputs [i].GetComponentInChildren<Text> ().text = splitText [1];
+					switch (i) {
+					case(0):
+						customerName = splitText[1];
+						break;
+					case(1):
+						propertyAddress = splitText[1];
+						break;
+					case(2):
+						menInCrew = splitText[1];
+						break;
+					case(3):
+						city = splitText[1];
+						break;
+					case(4):
+						state = splitText[1];
+						break;
+					case(5):
+						zip = splitText[1];
+						break;
+					}
+				}
+			}
+		}
 
 	}
 	

@@ -41,13 +41,14 @@ public class WorkInfo : MonoBehaviour {
 		duplicateList[5].GetComponent<WorkIDHandler>().setID("0");
 		duplicateList[7].GetComponent<WorkIDHandler>().setID("0,0");
 		duplicateList[9].GetComponent<WorkIDHandler>().setID("0,0");
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
-
+		
 	//---------------------------------------------------------------------------------------------------------------------
 
 	//Add another unit for work
