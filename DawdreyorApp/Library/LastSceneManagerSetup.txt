@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Estimates/PickMaterial.unity
+- path: Assets/Scenes/Estimates/NewEstimate.unity
   isLoaded: 1
   isActive: 1

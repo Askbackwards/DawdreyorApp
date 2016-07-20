@@ -1,18 +1,19 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Estimate\CreateList.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\WorkAuthorizations\Signature.cs">
     <Files>
-      <File FileName="Assets\Scripts\Estimate\CreateList.cs" Line="32" Column="54" />
-      <File FileName="Assets\Scripts\WorkAuthorizations\LoadList.cs" Line="23" Column="4" />
+      <File FileName="Assets\Scripts\WorkAuthorizations\Signature.cs" Line="157" Column="45" />
+      <File FileName="Assets\Scripts\Estimate\PinchZoom.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Estimate\CreateList.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\WorkAuthorizations\LoadList.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\GetList.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\WorkAuthorizations\TakePicture.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\WorkAuthorizations\WorkInfo.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\WorkAuthorizations\Signature.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\WorkAuthorizations\ClockInOut.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\WorkAuthorizations\ExtraNotes.cs" Line="16" Column="14" />
+      <File FileName="Assets\Scripts\WorkAuthorizations\ExtraNotes.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\WorkAuthorizations\SaveWONumInPP.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\WorkAuthorizations\WriteValsForLocation.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\TimeSheet\ClockIt.cs" Line="75" Column="29" />
+      <File FileName="Assets\Scripts\TimeSheet\ClockIt.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\WorkAuthorizations\ScreenOrient.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\WorkAuthorizations\DeActivate.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\WorkAuthorizations\IDHandling.cs" Line="1" Column="1" />
