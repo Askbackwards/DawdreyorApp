@@ -1,8 +1,10 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\WorkAuthorizations\Signature.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Estimate\WriteToFile.cs">
     <Files>
-      <File FileName="Assets\Scripts\WorkAuthorizations\Signature.cs" Line="157" Column="45" />
+      <File FileName="Assets\Scripts\Estimate\WriteToFile.cs" Line="46" Column="22" />
+      <File FileName="Assets\Scripts\Estimate\AddObject.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\WorkAuthorizations\Signature.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Estimate\PinchZoom.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Estimate\CreateList.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\WorkAuthorizations\LoadList.cs" Line="1" Column="1" />

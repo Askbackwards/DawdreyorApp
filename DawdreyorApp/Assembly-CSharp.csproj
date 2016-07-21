@@ -45,8 +45,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Estimate\AddObject.cs" />
      <Compile Include="Assets\Scripts\Estimate\CreateList.cs" />
      <Compile Include="Assets\Scripts\Estimate\PinchZoom.cs" />
+     <Compile Include="Assets\Scripts\Estimate\SaveEstimatePP.cs" />
+     <Compile Include="Assets\Scripts\Estimate\WriteToFile.cs" />
      <Compile Include="Assets\Scripts\GetList.cs" />
      <Compile Include="Assets\Scripts\LoadScene.cs" />
      <Compile Include="Assets\Scripts\Login\SaveLogin.cs" />
