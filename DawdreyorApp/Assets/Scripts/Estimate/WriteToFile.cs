@@ -7,6 +7,7 @@ public class WriteToFile : MonoBehaviour {
 	private int position;
 	private string name, txtPath;
 	private bool addIt;
+	private GameObject theObject;
 
 	// Use this for initialization
 	void Start () {
@@ -29,6 +30,14 @@ public class WriteToFile : MonoBehaviour {
 		name = theName;
 	}
 
+	public int getNumber() {
+		return position;
+	}
+
+	public string getName() {
+		return name;
+	}
+
 	//Write it
 	public void writeIt(string input) {
 		//Make file if it doesn't exsist
@@ -42,7 +51,7 @@ public class WriteToFile : MonoBehaviour {
 
 		//Write stuff
 		if (oldText.Length > position) {
-			for (int i = 0; i < oldText.Length; i++) {
+			for (int i = 0; i < oldText.Length - 1; i++) {
 				if (i != position) {
 					if (addIt) {
 						streamW.WriteLine (oldText [i-1]);
@@ -58,12 +67,24 @@ public class WriteToFile : MonoBehaviour {
 			}
 		} else {
 			for (int i = 0; i < oldText.Length; i++) {
-				streamW.WriteLine (oldText [i]);
+				if(!oldText[i].Contains(name))
+					streamW.WriteLine (oldText [i]);
 			}
 			streamW.WriteLine (name + "," + input);
 		}
 		addIt = false;
 		streamW.Flush ();
 		streamW.Close ();
+	}
+
+	//----------------------------------------------------------------------------------
+
+	public void WriteDropdown(int picked) {
+		string[] options = theObject.gameObject.GetComponent<DefineList> ().GetOptions ();
+		writeIt(options[picked]);
+	}
+
+	public void SetObject(GameObject setObject) {
+		theObject = setObject;
 	}
 }

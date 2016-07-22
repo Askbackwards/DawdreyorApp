@@ -3,7 +3,7 @@ using System.Collections;
 
 public class AddObject : MonoBehaviour {
 
-	public GameObject contentPane, lightElec, entry, rollUp, window, sheet, misc;
+	public GameObject codeHolder, contentPane, lightElec, entry, rollUp, window, sheet, misc;
 
 	private int choice;
 
@@ -54,6 +54,9 @@ public class AddObject : MonoBehaviour {
 			tempObj.transform.SetParent (contentPane.transform);
 			tempObj.transform.localScale = new Vector3 (1, 1, 1);
 			tempObj.SetActive (true);
+			//Add new inputs to count
+			if (tempObj.name.Contains("Input") || tempObj.name.Contains("Drop"))
+				codeHolder.GetComponent<SubmitEstimate> ().AddInputs (1);
 		}
 	}
 }
