@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class TakePicture : MonoBehaviour {
 
 	public GameObject button1, button2;
+	public string sceneToLoad;
 
 	private WebCamTexture webCamTex;
 	private bool first, done;
@@ -69,8 +70,38 @@ public class TakePicture : MonoBehaviour {
 		done = true;
 	}
 
+	public void SnapPicture2() {
+		//Turn off stuff to take picture
+		button1.SetActive (false);
+		button2.SetActive (false);
+
+		StartCoroutine (SnapIt2 ());
+	}
+
+	private IEnumerator SnapIt2() {
+		//Wait till end of frame
+		yield return new WaitForEndOfFrame();
+
+		//Create a texture the size of the area
+		Texture2D tex = new Texture2D(Camera.main.pixelWidth, Camera.main.pixelHeight, TextureFormat.RGB24, false);
+
+		//Read screen contents into the texture
+		tex.ReadPixels(new Rect(0,0, Camera.main.pixelWidth, Camera.main.pixelHeight), 0, 0);
+		tex.Apply ();
+
+		//Encode texture into PNG
+		byte[] bytes = tex.EncodeToPNG();
+		Destroy (tex);
+
+		//Save PNG
+		PlayerPrefs.SetInt("picAmount2", PlayerPrefs.GetInt("picAmount2") + 1);
+		File.WriteAllBytes(txtPath + "Estimate_" + PlayerPrefs.GetString("EstimateNumber") + "_Picture" + PlayerPrefs.GetInt("picAmount2") + ".png", bytes);
+
+		done = true;
+	}
+
 	public void Endit() {
 		webCamTex.Stop ();
-		SceneManager.LoadScene ("NewWorkAuthorizationMenu");
+		SceneManager.LoadScene (sceneToLoad);
 	}
 }

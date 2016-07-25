@@ -6,10 +6,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{8AF9B8B9-C148-7EA5-99D8-1EDBAD66F42B}</ProjectGuid>
+    <ProjectGuid>{55DBC594-F862-223C-4750-EBF488F54A53}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>Assembly-UnityScript</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>Assets</BaseDirectory>
@@ -45,34 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Estimate\AddObject.cs" />
-     <Compile Include="Assets\Scripts\Estimate\CreateList.cs" />
-     <Compile Include="Assets\Scripts\Estimate\DefineList.cs" />
-     <Compile Include="Assets\Scripts\Estimate\Drawing.cs" />
-     <Compile Include="Assets\Scripts\Estimate\IDStuff.cs" />
-     <Compile Include="Assets\Scripts\Estimate\PickPictureList.cs" />
-     <Compile Include="Assets\Scripts\Estimate\PinchZoom.cs" />
-     <Compile Include="Assets\Scripts\Estimate\SaveEstimatePP.cs" />
-     <Compile Include="Assets\Scripts\Estimate\SubmitEstimate.cs" />
-     <Compile Include="Assets\Scripts\Estimate\WriteToFile.cs" />
-     <Compile Include="Assets\Scripts\GetList.cs" />
-     <Compile Include="Assets\Scripts\LoadScene.cs" />
-     <Compile Include="Assets\Scripts\Login\SaveLogin.cs" />
-     <Compile Include="Assets\Scripts\TimeSheet\ClockIt.cs" />
-     <Compile Include="Assets\Scripts\TimeSheet\DeleteIdentifier.cs" />
-     <Compile Include="Assets\Scripts\WorkAuthorizations\AgreementText.cs" />
-     <Compile Include="Assets\Scripts\WorkAuthorizations\ClockInOut.cs" />
-     <Compile Include="Assets\Scripts\WorkAuthorizations\DeActivate.cs" />
-     <Compile Include="Assets\Scripts\WorkAuthorizations\ExtraNotes.cs" />
-     <Compile Include="Assets\Scripts\WorkAuthorizations\IDHandling.cs" />
-     <Compile Include="Assets\Scripts\WorkAuthorizations\LoadList.cs" />
-     <Compile Include="Assets\Scripts\WorkAuthorizations\SaveWONumInPP.cs" />
-     <Compile Include="Assets\Scripts\WorkAuthorizations\ScreenOrient.cs" />
-     <Compile Include="Assets\Scripts\WorkAuthorizations\Signature.cs" />
-     <Compile Include="Assets\Scripts\WorkAuthorizations\TakePicture.cs" />
-     <Compile Include="Assets\Scripts\WorkAuthorizations\WorkIDHandler.cs" />
-     <Compile Include="Assets\Scripts\WorkAuthorizations\WorkInfo.cs" />
-     <Compile Include="Assets\Scripts\WorkAuthorizations\WriteValsForLocation.cs" />
+     <Compile Include="Assets\Scripts\Estimate\NewBehaviourScript.js" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
