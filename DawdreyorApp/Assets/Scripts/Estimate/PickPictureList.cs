@@ -12,8 +12,6 @@ public class PickPictureList : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		txtPath = Application.persistentDataPath + "/";
-		PlayerPrefs.SetInt ("picAmount2", 1);
-		PlayerPrefs.SetString ("EstimateNumber", "1");
 	}
 	
 	// Update is called once per frame
@@ -25,7 +23,7 @@ public class PickPictureList : MonoBehaviour {
 		
 		view.SetActive (true);
 
-		for (int i = 1; i <= PlayerPrefs.GetInt("picAmount2"); i++) {
+		for (int i = 1; i <= PlayerPrefs.GetInt("picAmount2" + PlayerPrefs.GetString("EstimateNumber")); i++) {
 			
 			GameObject tempObj = (GameObject)Instantiate (pictureSample);
 			byte[] data = File.ReadAllBytes(txtPath + "Estimate_" + PlayerPrefs.GetString("EstimateNumber") + "_Picture" + i + ".png");

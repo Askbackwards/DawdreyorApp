@@ -20,4 +20,8 @@ public class IDHandling : MonoBehaviour {
 	public void SetPPWithID() {
 		PlayerPrefs.SetString ("WOID", ID);
 	}
+
+	public void SetEstimateID() {
+		PlayerPrefs.SetString ("EstimateNumber", ID);
+	}
 }

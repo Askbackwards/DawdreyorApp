@@ -20,7 +20,7 @@ public class SaveWONumInPP : MonoBehaviour {
 		doneSending = false;
 		PlayerPrefs.SetInt ("In", 0);
 		PlayerPrefs.SetInt ("Out", 0);
-		PlayerPrefs.SetInt ("picAmount", 0);
+		PlayerPrefs.SetInt ("picAmount" + PlayerPrefs.GetString("WOID"), 0);
 		txtPath = Application.persistentDataPath + "/WOList.txt";
 		//txtPath = "C:/Users/nomore/Desktop/WOList.txt";
 	}

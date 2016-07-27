@@ -4,8 +4,8 @@ using System.IO;
 
 public class WriteToFile : MonoBehaviour {
 
-	private int position;
-	private string name, txtPath;
+	private int position, addnum;
+	private string name, txtPath, color;
 	private bool addIt;
 	private GameObject theObject;
 
@@ -18,6 +18,10 @@ public class WriteToFile : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	public void setColor(string choice) {
+		color = choice;
 	}
 
 	//store where this thing should be written
@@ -41,8 +45,9 @@ public class WriteToFile : MonoBehaviour {
 	//Write it
 	public void writeIt(string input) {
 		//Make file if it doesn't exsist
-		if (!File.Exists (txtPath))
+		if (!File.Exists (txtPath)) {
 			File.Create (txtPath).Dispose ();
+		}
 
 		string[] oldText = File.ReadAllLines(txtPath);
 
@@ -51,27 +56,35 @@ public class WriteToFile : MonoBehaviour {
 
 		//Write stuff
 		if (oldText.Length > position) {
-			for (int i = 0; i < oldText.Length - 1; i++) {
+			for (int i = 0; i < oldText.Length + addnum; i++) {
 				if (i != position) {
 					if (addIt) {
-						streamW.WriteLine (oldText [i-1]);
+						if (oldText [i - 1].Replace(" ", "") != "")
+							streamW.WriteLine (oldText [i-1]);
 					} else {
-						streamW.WriteLine (oldText [i]);
+						if (oldText [i].Replace(" ", "") != "")
+							streamW.WriteLine (oldText [i]);
 					}
 				} else {
 					streamW.WriteLine (name + "," + input);
 					addIt = true;
-					if (oldText [i].Contains(name))
+					addnum = 1;
+					if (oldText [i].Contains (name)) {
 						addIt = false;
+						addnum = 0;
+					}
 				}
 			}
 		} else {
 			for (int i = 0; i < oldText.Length; i++) {
-				if(!oldText[i].Contains(name))
+				if (!oldText [i].Contains (name) && oldText[i].Replace(" ", "") != "") {
 					streamW.WriteLine (oldText [i]);
+					Debug.Log ("Wrote");
+				}
 			}
 			streamW.WriteLine (name + "," + input);
 		}
+		addnum = 0;
 		addIt = false;
 		streamW.Flush ();
 		streamW.Close ();
@@ -86,5 +99,9 @@ public class WriteToFile : MonoBehaviour {
 
 	public void SetObject(GameObject setObject) {
 		theObject = setObject;
+	}
+
+	public void ColorWrite() {
+		writeIt (color);
 	}
 }

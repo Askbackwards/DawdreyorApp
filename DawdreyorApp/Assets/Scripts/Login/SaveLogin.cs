@@ -27,7 +27,6 @@ public class SaveLogin : MonoBehaviour {
 		PlayerPrefs.SetString("Username", "nothing");
 		PlayerPrefs.SetString ("Password", "nothing");
 		PlayerPrefs.SetInt ("Index", 0);
-		PlayerPrefs.SetInt ("picAmount", 0);
 	
 	}
 	

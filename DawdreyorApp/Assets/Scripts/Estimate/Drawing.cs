@@ -19,7 +19,7 @@ public class Drawing : MonoBehaviour {
 		txtPath = Application.persistentDataPath + "/";
 		LR = LRobj.GetComponent<LineRenderer> ();
 		curVtex = 0;
-		ready = false;
+		ready = true;
 		ready2 = false;
 	}
 	
@@ -87,8 +87,8 @@ public class Drawing : MonoBehaviour {
 		Destroy (tex);
 
 		//Save PNG
-		PlayerPrefs.SetInt("picAmount2", PlayerPrefs.GetInt("picAmount2") + 1);
-		File.WriteAllBytes(txtPath + "Estimate_" + PlayerPrefs.GetString("EstimateNumber") + "_Picture" + PlayerPrefs.GetInt("picAmount2") + ".png", bytes);
+		PlayerPrefs.SetInt(("picAmount2" + PlayerPrefs.GetString("EstimateNumber")), PlayerPrefs.GetInt(("picAmount2" + PlayerPrefs.GetString("EstimateNumber"))) + 1);
+		File.WriteAllBytes(txtPath + "Estimate_" + PlayerPrefs.GetString("EstimateNumber") + "_Picture" + PlayerPrefs.GetInt(("picAmount2" + PlayerPrefs.GetString("EstimateNumber"))) + ".png", bytes);
 
 		ready2 = true;
 	}

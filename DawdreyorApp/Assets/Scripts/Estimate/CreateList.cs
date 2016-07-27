@@ -37,6 +37,8 @@ public class CreateList : MonoBehaviour {
 
 				tempObj = (GameObject)Instantiate (colorButton);
 				tempObj.GetComponentInChildren<Text> ().text = tempArray[1];
+				tempObj.GetComponent<WriteToFile> ().setName ("Picked Color");
+				tempObj.GetComponent<WriteToFile> ().setColor (tempArray[1]);
 				tempObj.transform.SetParent (contentPane.transform);
 				tempObj.transform.localScale = new Vector3 (1, 1, 1);
 				tempObj.SetActive (true);

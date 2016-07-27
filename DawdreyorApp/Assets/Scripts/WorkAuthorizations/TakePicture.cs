@@ -64,8 +64,8 @@ public class TakePicture : MonoBehaviour {
 		Destroy (tex);
 
 		//Save PNG
-		PlayerPrefs.SetInt("picAmount", PlayerPrefs.GetInt("picAmount") + 1);
-		File.WriteAllBytes(txtPath + PlayerPrefs.GetString("WOID") + "_Picture" + PlayerPrefs.GetInt("picAmount") + ".png", bytes);
+		PlayerPrefs.SetInt("picAmount" + PlayerPrefs.GetString("WOID"), PlayerPrefs.GetInt("picAmount" + PlayerPrefs.GetString("WOID")) + 1);
+		File.WriteAllBytes(txtPath + PlayerPrefs.GetString("WOID") + "_Picture" + PlayerPrefs.GetInt("picAmount" + PlayerPrefs.GetString("WOID")) + ".png", bytes);
 
 		done = true;
 	}
@@ -94,8 +94,8 @@ public class TakePicture : MonoBehaviour {
 		Destroy (tex);
 
 		//Save PNG
-		PlayerPrefs.SetInt("picAmount2", PlayerPrefs.GetInt("picAmount2") + 1);
-		File.WriteAllBytes(txtPath + "Estimate_" + PlayerPrefs.GetString("EstimateNumber") + "_Picture" + PlayerPrefs.GetInt("picAmount2") + ".png", bytes);
+		PlayerPrefs.SetInt("picAmount2" + PlayerPrefs.GetString("EstimateNumber"), PlayerPrefs.GetInt("picAmount2" + PlayerPrefs.GetString("EstimateNumber")) + 1);
+		File.WriteAllBytes(txtPath + "Estimate_" + PlayerPrefs.GetString("EstimateNumber") + "_Picture" + PlayerPrefs.GetInt("picAmount2" + PlayerPrefs.GetString("EstimateNumber")) + ".png", bytes);
 
 		done = true;
 	}

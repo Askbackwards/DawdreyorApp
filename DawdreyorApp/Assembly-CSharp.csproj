@@ -50,6 +50,7 @@
      <Compile Include="Assets\Scripts\Estimate\DefineList.cs" />
      <Compile Include="Assets\Scripts\Estimate\Drawing.cs" />
      <Compile Include="Assets\Scripts\Estimate\IDStuff.cs" />
+     <Compile Include="Assets\Scripts\Estimate\LoadEstimateList.cs" />
      <Compile Include="Assets\Scripts\Estimate\PickPictureList.cs" />
      <Compile Include="Assets\Scripts\Estimate\PinchZoom.cs" />
      <Compile Include="Assets\Scripts\Estimate\SaveEstimatePP.cs" />

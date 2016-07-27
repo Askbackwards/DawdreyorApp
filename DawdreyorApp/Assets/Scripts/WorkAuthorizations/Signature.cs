@@ -64,8 +64,8 @@ public class Signature : MonoBehaviour {
 			File.Delete (txtPath + PlayerPrefs.GetString ("WOID") + "_CustomerSignature.png");
 			File.Delete (txtPath + PlayerPrefs.GetString ("WOID") + "_Crews4HireRepSignature.png");
 			File.Delete (txtPath + PlayerPrefs.GetString ("WOID") + "_Info.txt");
-			if (PlayerPrefs.GetInt ("picAmount") != 0) {
-				for (int i = 1; i <= PlayerPrefs.GetInt ("picAmount"); i++) {
+			if (PlayerPrefs.GetInt ("picAmount" + PlayerPrefs.GetString("WOID")) != 0) {
+				for (int i = 1; i <= PlayerPrefs.GetInt ("picAmount" + PlayerPrefs.GetString("WOID")); i++) {
 					File.Delete (txtPath + PlayerPrefs.GetString ("WOID") + "_Picture" + i + ".png");
 				}
 			}
@@ -158,8 +158,8 @@ public class Signature : MonoBehaviour {
 		mail.Subject = "WorkAuthorization_" + PlayerPrefs.GetString("WOID");
 		mail.Body = "WorkAuthorizations";
 
-		if (PlayerPrefs.GetInt ("picAmount") != 0) {
-			for (int i = 1; i <= PlayerPrefs.GetInt ("picAmount"); i++) {
+		if (PlayerPrefs.GetInt ("picAmount" + PlayerPrefs.GetString("WOID")) != 0) {
+			for (int i = 1; i <= PlayerPrefs.GetInt ("picAmount" + PlayerPrefs.GetString("WOID")); i++) {
 				System.Net.Mail.Attachment at = new System.Net.Mail.Attachment (txtPath + PlayerPrefs.GetString ("WOID") + "_Picture" + i + ".png");
 				mail.Attachments.Add (at);
 			}

@@ -7,7 +7,7 @@ public class SaveEstimatePP : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		PlayerPrefs.SetInt ("picAmount2", 0);
+		
 	}
 	
 	// Update is called once per frame
@@ -17,5 +17,6 @@ public class SaveEstimatePP : MonoBehaviour {
 
 	public void savePP(string num) {
 		PlayerPrefs.SetString ("EstimateNumber", num);
+		PlayerPrefs.SetInt (("picAmount2" + PlayerPrefs.GetString("EstimateNumber")), 0);
 	}
 }
