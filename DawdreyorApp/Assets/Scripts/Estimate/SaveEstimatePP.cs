@@ -17,6 +17,12 @@ public class SaveEstimatePP : MonoBehaviour {
 
 	public void savePP(string num) {
 		PlayerPrefs.SetString ("EstimateNumber", num);
-		PlayerPrefs.SetInt (("picAmount2" + PlayerPrefs.GetString("EstimateNumber")), 0);
+		PlayerPrefs.SetInt (("picAmount2" + num), 0);
+		PlayerPrefs.SetInt ("lighting" + num, 0);
+		PlayerPrefs.SetInt ("entryDoor" + num, 0);
+		PlayerPrefs.SetInt ("rollUp" + num, 0);
+		PlayerPrefs.SetInt ("window" + num, 0);
+		PlayerPrefs.SetInt ("sheet" + num, 0);
+		PlayerPrefs.SetInt ("misc" + num, 0);
 	}
 }

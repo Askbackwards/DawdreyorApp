@@ -61,8 +61,27 @@ public class SubmitEstimate : MonoBehaviour {
 	}
 
 	//Add number of inputs if an object is added
-	public void AddInputs(int amountAdded) {
-		curInputs += amountAdded;
+	public void AddInputs(int whatAdded) {
+		switch (whatAdded) {
+		case(1):
+			PlayerPrefs.SetInt ("lighting" + PlayerPrefs.GetString("EstimateNumber"), 1);
+			break;
+		case(2):
+			PlayerPrefs.SetInt ("entryDoor" + PlayerPrefs.GetString("EstimateNumber"), 1);
+			break;
+		case(3):
+			PlayerPrefs.SetInt ("rollUp" + PlayerPrefs.GetString("EstimateNumber"), 1);
+			break;
+		case(4):
+			PlayerPrefs.SetInt ("window" + PlayerPrefs.GetString("EstimateNumber"), 1);
+			break;
+		case(5):
+			PlayerPrefs.SetInt ("sheet" + PlayerPrefs.GetString("EstimateNumber"), 1);
+			break;
+		case(6):
+			PlayerPrefs.SetInt ("misc" + PlayerPrefs.GetString("EstimateNumber"), 1);
+			break;
+		}
 	}
 
 	//Send the estimate txt
@@ -74,7 +93,7 @@ public class SubmitEstimate : MonoBehaviour {
 		string[] oldText = File.ReadAllLines(txtPath2);
 
 		//read through it
-		for (int i = 0; i < (curInputs - skipCount); i++) {
+		/*for (int i = 0; i < (curInputs - skipCount); i++) {
 			if (oldText.Length <= i) {
 				empties [emptyCount] = inputs [i];
 				emptyCount += 1;
@@ -84,6 +103,61 @@ public class SubmitEstimate : MonoBehaviour {
 				skipCount += 1;
 			}
 
+		}*/
+
+		for (int i = 0; i <= 16; i++) {
+			if (oldText.Length - 1 < i || oldText [i] == "") {
+				empties [emptyCount] = inputs [i];
+				emptyCount += 1;
+			}
+		}
+		if (PlayerPrefs.GetInt("lighting" + PlayerPrefs.GetString("EstimateNumber")) == 1) {
+			for (int i = 17; i <= 26; i++) {
+				if (oldText.Length - 1 < i || oldText [i] == "") {
+					empties [emptyCount] = inputs [i];
+					emptyCount += 1;
+				}
+			}
+		}
+		if (PlayerPrefs.GetInt("entryDoor" + PlayerPrefs.GetString("EstimateNumber")) == 1) {
+			for (int i = 27; i <= 40; i++) {
+				if (oldText.Length - 1 < i || oldText [i] == "") {
+					empties [emptyCount] = inputs [i];
+					emptyCount += 1;
+				}
+			}
+		}
+		if (PlayerPrefs.GetInt("rollUp" + PlayerPrefs.GetString("EstimateNumber")) == 1) {
+			for (int i = 41; i <= 55; i++) {
+				if (oldText.Length - 1 < i || oldText [i] == "") {
+					empties [emptyCount] = inputs [i];
+					emptyCount += 1;
+				}
+			}
+		}
+		if (PlayerPrefs.GetInt("window" + PlayerPrefs.GetString("EstimateNumber")) == 1) {
+			for (int i = 56; i <= 60; i++) {
+				if (oldText.Length - 1 < i || oldText [i] == "") {
+					empties [emptyCount] = inputs [i];
+					emptyCount += 1;
+				}
+			}
+		}
+		if (PlayerPrefs.GetInt("sheet" + PlayerPrefs.GetString("EstimateNumber")) == 1) {
+			for (int i = 61; i <= 62; i++) {
+				if (oldText.Length - 1 < i || oldText [i] == "") {
+					empties [emptyCount] = inputs [i];
+					emptyCount += 1;
+				}
+			}
+		}
+		if (PlayerPrefs.GetInt("misc" + PlayerPrefs.GetString("EstimateNumber")) == 1) {
+			for (int i = 63; i <= 73; i++) {
+				if (oldText.Length - 1 < i || oldText [i] == "") {
+					empties [emptyCount] = inputs [i];
+					emptyCount += 1;
+				}
+			}
 		}
 
 		popUp.SetActive (true);
@@ -158,12 +232,14 @@ public class SubmitEstimate : MonoBehaviour {
 			string[] oldText = File.ReadAllLines (txtPath2);
 
 			//read through it
-			for (int i = 0; i < (oldText.Length - 1 + skipCount); i++) {
-				if (oldText[i -skipCount].CompareTo(inputs[i]) == -1) {
-					string[] holder = oldText [i - skipCount].Split (",".ToCharArray ());
-					inputObjs [i].GetComponentInChildren<Text> ().text = holder[1];
-				} else {
-					skipCount += 1;
+			for (int i = 0; i < (oldText.Length + skipCount); i++) {
+				if (oldText [i - skipCount] != "") {
+					if (oldText [i - skipCount].CompareTo (inputs [i]) == -1) {
+						string[] holder = oldText [i - skipCount].Split (",".ToCharArray ());
+						inputObjs [i].GetComponentInChildren<Text> ().text = holder [1];
+					} else {
+						skipCount += 1;
+					}
 				}
 
 			}

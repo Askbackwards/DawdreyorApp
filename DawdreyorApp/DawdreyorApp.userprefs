@@ -1,21 +1,21 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Estimate\WriteToFile.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Estimate\SubmitEstimate.cs">
     <Files>
+      <File FileName="Assets\Scripts\Estimate\WriteToFile.cs" Line="97" Column="45" />
       <File FileName="Assets\Scripts\Estimate\LoadEstimateList.cs" Line="28" Column="30" />
-      <File FileName="Assets\Scripts\Estimate\SubmitEstimate.cs" Line="161" Column="43" />
+      <File FileName="Assets\Scripts\Estimate\SubmitEstimate.cs" Line="156" Column="55" />
       <File FileName="Assets\Scripts\Estimate\Drawing.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Estimate\IDStuff.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Estimate\PickPictureList.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Estimate\WriteToFile.cs" Line="66" Column="40" />
       <File FileName="Assets\Scripts\Estimate\AddObject.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Estimate\SaveEstimatePP.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Estimate\SaveEstimatePP.cs" Line="26" Column="38" />
       <File FileName="Assets\Scripts\WorkAuthorizations\Signature.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Estimate\PinchZoom.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Estimate\CreateList.cs" Line="40" Column="59" />
+      <File FileName="Assets\Scripts\Estimate\CreateList.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\WorkAuthorizations\TakePicture.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\WorkAuthorizations\WorkInfo.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\WorkAuthorizations\LoadList.cs" Line="22" Column="1" />
+      <File FileName="Assets\Scripts\WorkAuthorizations\LoadList.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\WorkAuthorizations\ClockInOut.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\WorkAuthorizations\ExtraNotes.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\WorkAuthorizations\SaveWONumInPP.cs" Line="1" Column="1" />
@@ -23,7 +23,7 @@
       <File FileName="Assets\Scripts\TimeSheet\ClockIt.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\WorkAuthorizations\ScreenOrient.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\WorkAuthorizations\DeActivate.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\WorkAuthorizations\IDHandling.cs" Line="25" Column="48" />
+      <File FileName="Assets\Scripts\WorkAuthorizations\IDHandling.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Login\SaveLogin.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\LoadScene.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\TimeSheet\DeleteIdentifier.cs" Line="1" Column="1" />

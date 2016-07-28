@@ -51,11 +51,15 @@ public class WriteToFile : MonoBehaviour {
 
 		string[] oldText = File.ReadAllLines(txtPath);
 
+		File.Delete (txtPath);
+		File.Create (txtPath).Dispose ();
+
 		//OpenFile
 		StreamWriter streamW = new StreamWriter(txtPath);
 
 		//Write stuff
-		if (oldText.Length > position) {
+		/*if (oldText.Length > position) {
+			Debug.Log ("test");
 			for (int i = 0; i < oldText.Length + addnum; i++) {
 				if (i != position) {
 					if (addIt) {
@@ -79,11 +83,35 @@ public class WriteToFile : MonoBehaviour {
 			for (int i = 0; i < oldText.Length; i++) {
 				if (!oldText [i].Contains (name) && oldText[i].Replace(" ", "") != "") {
 					streamW.WriteLine (oldText [i]);
-					Debug.Log ("Wrote");
 				}
 			}
 			streamW.WriteLine (name + "," + input);
+		}*/
+
+		//Another way to write stuff
+		if (oldText.Length > position) {
+			for (int i = 0; i < oldText.Length; i++) {
+				if (i != position && !addIt) {
+					streamW.WriteLine (oldText [i]);
+				} else if (i == position) {
+					streamW.WriteLine (name + "," + input);
+					addnum += 1;
+				}
+			}
+		} else if (position >= oldText.Length) {
+			for (int i = 0; i <= position; i++) {
+				if (i != position && !addIt) {
+					if (i < oldText.Length)
+						streamW.WriteLine (oldText [i]);
+					else
+						streamW.WriteLine ("");
+				} else if (i == position) {
+					streamW.WriteLine (name + "," + input);
+				}
+			}
 		}
+
+
 		addnum = 0;
 		addIt = false;
 		streamW.Flush ();
