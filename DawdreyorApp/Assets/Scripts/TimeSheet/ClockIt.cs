@@ -304,9 +304,9 @@ public class ClockIt : MonoBehaviour {
 		for (int i = 0; i < oldText.Length; i++) {
 			string[] tempLine = oldText [i].Split (spaceArray, 6);
 			if (tempLine.Length < 4) {
-				streamW.WriteLine (tempLine [0] + "," + tempLine [1] + "," + tempLine [2] + "\n");
+				streamW.WriteLine (tempLine [0] + "," + tempLine [1] + "," + tempLine [2]);
 			} else {
-				streamW.WriteLine (tempLine [0] + "," + tempLine [1] + "," + tempLine [2] + ",," + tempLine [3] + "," + tempLine [4] + "," + tempLine[5] + "\n");
+				streamW.WriteLine (tempLine [0] + "," + tempLine [1] + "," + tempLine [2] + ",," + tempLine [3] + "," + tempLine [4] + "," + tempLine[5]);
 			}
 		}
 		streamW.Flush ();
