@@ -18,10 +18,10 @@ public class LoadEstimateList : MonoBehaviour {
 
 		//Find Estimate txts
 		foreach (string file in Directory.GetFiles(txtPath)) {
-			if (file.Contains ("Estimate")) {
+			if (file.Contains ("_Estimate")) {
 				string[] temp = file.Split ("/".ToCharArray ());
 				for (int i = 0; i < temp.Length; i++) {
-					if (temp [i].Contains ("Estimate")) {
+					if (temp [i].Contains ("_Estimate")) {
 						temp2 = temp [i].Split ("_".ToCharArray ());
 					}
 				}
