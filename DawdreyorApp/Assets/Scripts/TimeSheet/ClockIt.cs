@@ -315,7 +315,7 @@ public class ClockIt : MonoBehaviour {
 		//Email that file
 		MailMessage mail = new MailMessage();
 		mail.From = new MailAddress ("crews4hiresender@gmail.com");
-		mail.Bcc.Add ("jerod_2de0@sendtodropbox.com");
+		mail.Bcc.Add ("david_6e25@sendtodropbox.com ");
 		//Make sure the send them a copy if they have an email
 		if (emailArray[PlayerPrefs.GetInt("Index") - 1] != "none")
 			mail.To.Add (emailArray[PlayerPrefs.GetInt("Index")-1]);
