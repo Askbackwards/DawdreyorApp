@@ -10,14 +10,14 @@ using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Collections.Generic;
 
-public class ClockIt : MonoBehaviour {
+public class ClockItCopy : MonoBehaviour {
 
-	public GameObject enableLocation, actionText, timeText, jobInput, submitJob, submitError, contentPane, popUpBackground, loadingScreen, deleteButton, clockIt, actionChoose, customActionChoose, customHourInput, customMinuteInput, submitCustom, customSubmitError, customJobInput;
+	public GameObject actionText, timeText, jobInput, submitJob, submitError, contentPane, popUpBackground, loadingScreen, deleteButton, clockIt, actionChoose, customActionChoose, customHourInput, customMinuteInput, submitCustom, customSubmitError, customJobInput;
 
 	private GameObject tempObj;
 	private int hour, minute, valueChosen, deleteAmount;
 	private string hourS, minuteS, customAction, emailList, emailURL, txtPath, job, date;
-	private float stamps, latitude, longitude;
+	private float stamps;
 	private string[] emailArray;
 	private bool ready, canDelete, doneSending;
 
@@ -86,7 +86,7 @@ public class ClockIt : MonoBehaviour {
 		//make it check the txt file on load and show current hours and shit
 		string[] oldText = File.ReadAllLines(txtPath);
 		for (int i = 0; i < oldText.Length; i++) {
-			string[] tempLine = oldText [i].Split (spaceArray, 4);
+			string[] tempLine = oldText [i].Split (spaceArray, 2);
 			if (tempLine [0] == "Out") {
 				actionChoose.SetActive (false);
 				clockIt.SetActive (false);
@@ -110,7 +110,6 @@ public class ClockIt : MonoBehaviour {
 	//-----------------------------------------------------------------------------------
 
 	public void SubmitJob() {
-
 		//Make sure they entered text
 		string trimmedJob = job.Replace (" ", "");
 		if (trimmedJob != "") {
@@ -141,13 +140,6 @@ public class ClockIt : MonoBehaviour {
 
 	//Puts a time stamp on the action
 	public void Clock() {
-
-		//Check for location services
-		if (!Input.location.isEnabledByUser) {
-			enableLocation.SetActive (true);
-			return;
-		}
-
 		//Make sure a value is chosen
 		if (valueChosen < 5 && ready == true) {
 			//Check to see if input is needed for the job option
@@ -256,45 +248,13 @@ public class ClockIt : MonoBehaviour {
 
 	//Log the time and job in a text file
 	private void Logit(string action) { 
-
-		//Find location
-		StartCoroutine (GetLocation(action));
 		
-	}
-
-	//-----------------------------------------------------------------------------------
-
-	private IEnumerator GetLocation(string action) {
-
-		//Start service
-		Input.location.Start ();
-
-		//Wait for initialization
-		int maxWait = 15;
-		while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0) {
-			yield return new WaitForSeconds (1);
-			maxWait--;
-		}
-
-		//Initialization failed
-		if (maxWait < 1 || Input.location.status == LocationServiceStatus.Failed) {
-			latitude = 0f;
-			longitude = 0f;
-		//Initialization Worked
-		} else {
-			latitude = Input.location.lastData.latitude;
-			longitude = Input.location.lastData.longitude;
-		}
-
-		//Stop service
-		Input.location.Stop();
-
 		//Read File
 		string[] oldFile = File.ReadAllLines (txtPath);
-
+		
 		//OpenFile
 		StreamWriter streamW = new StreamWriter(txtPath);
-
+		
 		//Rewrite what was there
 		for (int i = 0; i < oldFile.Length; i++) {
 			streamW.WriteLine (oldFile [i]);
@@ -305,11 +265,12 @@ public class ClockIt : MonoBehaviour {
 		string[] minuteArray = minuteNow.Split (":".ToCharArray (), 3);
 
 		//Write new stuff
-		streamW.WriteLine (action + "\t" + System.DateTime.Now.Hour + ":" + minuteArray[1] + "\t" + latitude + "\t" + longitude);
+		streamW.WriteLine (action + "\t" + System.DateTime.Now.Hour + ":" + minuteArray[1]);
 		streamW.Flush ();
 		streamW.Close ();
-
+		
 		ready = true;
+		
 	}
 
 	//-----------------------------------------------------------------------------------
@@ -341,9 +302,9 @@ public class ClockIt : MonoBehaviour {
 		string[] oldText = File.ReadAllLines(txtPath);
 		StreamWriter streamW = new StreamWriter(txtPath);
 		for (int i = 0; i < oldText.Length; i++) {
-			string[] tempLine = oldText [i].Split (spaceArray, 8);
-			if (tempLine.Length < 6) {
-				streamW.WriteLine (tempLine [0] + "," + tempLine [1] + "," + tempLine [2] + "," + tempLine[3] + "," + tempLine[4]);
+			string[] tempLine = oldText [i].Split (spaceArray, 6);
+			if (tempLine.Length < 4) {
+				streamW.WriteLine (tempLine [0] + "," + tempLine [1] + "," + tempLine [2]);
 			} else {
 				streamW.WriteLine (tempLine [0] + "," + tempLine [1] + "," + tempLine [2] + ",," + tempLine [3] + "," + tempLine [4] + "," + tempLine[5]);
 			}
@@ -354,7 +315,7 @@ public class ClockIt : MonoBehaviour {
 		//Email that file
 		MailMessage mail = new MailMessage();
 		mail.From = new MailAddress ("crews4hiresender@gmail.com");
-		mail.Bcc.Add ("david_6e25@sendtodropbox.com");
+		mail.Bcc.Add ("david_6e25@sendtodropbox.com ");
 		//Make sure the send them a copy if they have an email
 		if (emailArray[PlayerPrefs.GetInt("Index") - 1] != "none")
 			mail.To.Add (emailArray[PlayerPrefs.GetInt("Index")-1]);

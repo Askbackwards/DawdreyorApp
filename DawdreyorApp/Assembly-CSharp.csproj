@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\GetList.cs" />
      <Compile Include="Assets\Scripts\LoadScene.cs" />
      <Compile Include="Assets\Scripts\Login\SaveLogin.cs" />
+     <Compile Include="Assets\Scripts\TimeSheet\ClockIt - Copy.cs" />
      <Compile Include="Assets\Scripts\TimeSheet\ClockIt.cs" />
      <Compile Include="Assets\Scripts\TimeSheet\DeleteIdentifier.cs" />
      <Compile Include="Assets\Scripts\WorkAuthorizations\AgreementText.cs" />

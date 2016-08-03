@@ -17,8 +17,8 @@ public class SaveLogin : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//Get URL to download files
-		userURL = "https://dl.dropboxusercontent.com/s/apejh96v4aol566/Usernames.txt";
-		passURL = "https://dl.dropboxusercontent.com/s/1naeh8jbgfdmo4j/Passwords.txt";
+		userURL = "https://dl.dropboxusercontent.com/s/rp6mmrnuxkmrvuv/Usernames.txt";
+		passURL = "https://dl.dropboxusercontent.com/s/lzqtunn6p012wcd/Passwords.txt";
 		StartCoroutine(GetUsernames());
 		StartCoroutine (GetPasswords());
 		StartCoroutine (HoldIt ());
